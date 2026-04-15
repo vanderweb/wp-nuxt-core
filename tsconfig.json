@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "paths": {
+      "#app": ["./node_modules/nuxt/dist/app/index.d.ts"]
+    },
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": [
+    "index.ts",
+    "types/**/*.ts",
+    "utils/**/*.ts",
+    "composables/**/*.ts"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@vanderweb/wp-nuxt-core",
+  "version": "0.1.0",
+  "description": "Shared Nuxt 3 + headless WordPress core package",
+  "type": "module",
+  "main": "./index.ts",
+  "module": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "files": [
+    "index.ts",
+    "types",
+    "utils",
+    "composables"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "nuxt": "^3.0.0"
+  },
+  "devDependencies": {
+    "nuxt": "^3.0.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "nuxt",
+    "wordpress",
+    "headless",
+    "composables"
+  ],
+  "license": "MIT"
+}
