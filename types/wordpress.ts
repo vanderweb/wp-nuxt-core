@@ -93,3 +93,166 @@ export interface WpApiParams {
   orderby?: 'date' | 'id' | 'title' | 'slug' | 'menu_order' | 'relevance'
   [key: string]: unknown
 }
+
+// ---------------------------------------------------------------------------
+// Vander plugin types
+// ---------------------------------------------------------------------------
+
+export interface VanderAttachment {
+  id: number
+  url: string
+  alt: string
+}
+
+export interface VanderCasePost {
+  id: number
+  slug: string
+  title: string
+  excerpt: string
+  thumbnail_url: string
+}
+
+export interface VanderHeroSection {
+  type: 'hero'
+  heading: string
+  subheading: string
+  cta_label: string
+  cta_url: string
+  background_image: VanderAttachment | null
+  overlay_opacity: number
+}
+
+export interface VanderServiceItem {
+  title: string
+  icon: string
+  text: string
+}
+
+export interface VanderServicesSection {
+  type: 'services'
+  heading: string
+  subheading: string
+  items: VanderServiceItem[]
+}
+
+export interface VanderCaseItem {
+  post_id: VanderCasePost | null
+}
+
+export interface VanderCasesSection {
+  type: 'cases'
+  heading: string
+  subheading: string
+  case_ids: VanderCaseItem[]
+}
+
+export interface VanderAboutSection {
+  type: 'about'
+  heading: string
+  text: string
+  image: VanderAttachment | null
+  cta_label: string
+  cta_url: string
+}
+
+export interface VanderTestimonialItem {
+  quote: string
+  author: string
+  role: string
+  avatar: VanderAttachment | null
+}
+
+export interface VanderTestimonialsSection {
+  type: 'testimonials'
+  heading: string
+  items: VanderTestimonialItem[]
+}
+
+export interface VanderContactSection {
+  type: 'contact'
+  heading: string
+  subheading: string
+  email: string
+  phone: string
+  show_form: boolean
+}
+
+export interface VanderTextImageSection {
+  type: 'text_image'
+  heading: string
+  text: string
+  image: VanderAttachment | null
+  layout: 'image_left' | 'image_right'
+}
+
+export interface VanderFreetextSection {
+  type: 'freetext'
+  heading: string
+  content: string
+  centered: boolean
+}
+
+export type VanderSection =
+  | VanderHeroSection
+  | VanderServicesSection
+  | VanderCasesSection
+  | VanderAboutSection
+  | VanderTestimonialsSection
+  | VanderContactSection
+  | VanderTextImageSection
+  | VanderFreetextSection
+
+export interface VanderNavLink {
+  label: string
+  url: string
+  target: boolean
+}
+
+export interface VanderGeneralSettings {
+  siteName: string
+  siteDescription: string
+  logoUrl: string
+  faviconUrl: string
+  googleAnalyticsId: string
+  maintenanceMode: boolean
+}
+
+export interface VanderHeaderSettings {
+  logoUrl: string
+  logoAlt: string
+  navLinks: VanderNavLink[]
+  ctaLabel: string
+  ctaUrl: string
+  stickyHeader: boolean
+  transparentHeader: boolean
+}
+
+export interface VanderFooterLink {
+  label: string
+  url: string
+}
+
+export interface VanderFooterColumn {
+  heading: string
+  links: VanderFooterLink[]
+}
+
+export interface VanderSocialLink {
+  platform: 'facebook' | 'instagram' | 'linkedin' | 'x'
+  url: string
+}
+
+export interface VanderFooterSettings {
+  logoUrl: string
+  logoAlt: string
+  tagline: string
+  columns: VanderFooterColumn[]
+  bottomText: string
+  socialLinks: VanderSocialLink[]
+}
+
+export interface VanderSettings {
+  general: VanderGeneralSettings
+  header: VanderHeaderSettings
+  footer: VanderFooterSettings
+}
