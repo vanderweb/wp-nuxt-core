@@ -215,6 +215,10 @@ export interface VanderGeneralSettings {
   faviconUrl: string
   googleAnalyticsId: string
   maintenanceMode: boolean
+  primaryColor: string
+  accentColor: string
+  fontFamily: string
+  googleFontsUrl: string
 }
 
 export interface VanderHeaderSettings {
