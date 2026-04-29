@@ -3,25 +3,26 @@ import type { WpApiParams } from '../types/wordpress'
 export async function wpFetch<T>(
   baseUrl: string,
   endpoint: string,
-  params?: WpApiParams
+  params?: WpApiParams,
+  namespace = 'wp/v2'
 ): Promise<T> {
-  const url = `${baseUrl.replace(/\/$/, '')}/wp-json/wp/v2/${endpoint.replace(/^\//, '')}`
+  const url = new URL(
+    `${baseUrl.replace(/\/$/, '')}/wp-json/${namespace}/${endpoint.replace(/^\//, '')}`
+  )
 
-  try {
-    const data = await $fetch<T>(url, {
-      params: params as Record<string, unknown>,
-    })
-    return data
-  } catch (error: unknown) {
-    const status = (error as { response?: { status?: number } })?.response?.status
-    const message = (error as { message?: string })?.message ?? 'Unknown error'
-
-    if (status === 404) {
-      throw new Error(`WordPress API: Not found — ${url}`)
+  if (params) {
+    for (const [key, value] of Object.entries(params)) {
+      if (value !== undefined) url.searchParams.set(key, String(value))
     }
-    if (status === 401 || status === 403) {
-      throw new Error(`WordPress API: Unauthorized — ${url}`)
-    }
-    throw new Error(`WordPress API error (${status ?? 'unknown'}): ${message}`)
   }
+
+  const res = await fetch(url.toString())
+
+  if (!res.ok) {
+    if (res.status === 404) throw new Error(`WordPress API: Not found — ${url}`)
+    if (res.status === 401 || res.status === 403) throw new Error(`WordPress API: Unauthorized — ${url}`)
+    throw new Error(`WordPress API error (${res.status}): ${res.statusText}`)
+  }
+
+  return res.json() as Promise<T>
 }

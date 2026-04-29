@@ -53,6 +53,7 @@ export interface WpPost {
   date: string
   modified: string
   link: string
+  featured_media_src_url?: string | null
   yoast_head_json?: YoastHeadJson
   _embedded?: WpEmbedded
 }

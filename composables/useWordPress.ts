@@ -1,6 +1,6 @@
 import { useRuntimeConfig } from '#app'
 import { wpFetch } from '../utils/wpApi'
-import type { WpPost, WpPage, WpImage, WpApiParams } from '../types/wordpress'
+import type { WpPost, WpPage, WpImage, WpMenu, WpApiParams } from '../types/wordpress'
 
 export function useWordPress() {
   const config = useRuntimeConfig()
@@ -53,6 +53,14 @@ export function useWordPress() {
     })
   }
 
+  async function getMenus(): Promise<WpMenu[]> {
+    return wpFetch<WpMenu[]>(baseUrl, 'menus', undefined, 'menus/v1')
+  }
+
+  async function getMenu(id: number): Promise<WpMenu> {
+    return wpFetch<WpMenu>(baseUrl, `menus/${id}`, undefined, 'menus/v1')
+  }
+
   return {
     getPage,
     getPages,
@@ -60,5 +68,7 @@ export function useWordPress() {
     getPosts,
     getMedia,
     searchContent,
+    getMenus,
+    getMenu,
   }
 }
