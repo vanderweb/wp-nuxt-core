@@ -119,8 +119,11 @@ export interface VanderHeroSection {
   subheading: string
   cta_label: string
   cta_url: string
+  cta_label_2: string
+  cta_url_2: string
   background_image: VanderAttachment | null
   overlay_opacity: number
+  layout: 'split' | 'fullbleed' | 'headline'
 }
 
 export interface VanderServiceItem {
@@ -193,6 +196,70 @@ export interface VanderFreetextSection {
   centered: boolean
 }
 
+export interface VanderTeamMember {
+  name: string
+  role: string
+  bio: string
+  image: VanderAttachment | null
+}
+
+export interface VanderTeamSection {
+  type: 'team'
+  heading: string
+  subheading: string
+  items: VanderTeamMember[]
+}
+
+export interface VanderFaqItem {
+  question: string
+  answer: string
+}
+
+export interface VanderFaqSection {
+  type: 'faq'
+  heading: string
+  subheading: string
+  items: VanderFaqItem[]
+}
+
+export interface VanderCtaBannerSection {
+  type: 'cta_banner'
+  heading: string
+  subheading: string
+  cta_label: string
+  cta_url: string
+  dark_bg: boolean
+}
+
+export interface VanderProductItem {
+  title: string
+  price: string
+  url: string
+  image: VanderAttachment | null
+}
+
+export interface VanderFeaturedProductsSection {
+  type: 'featured_products'
+  heading: string
+  subheading: string
+  cta_label: string
+  cta_url: string
+  items: VanderProductItem[]
+}
+
+export interface VanderCategoryItem {
+  name: string
+  url: string
+  image: VanderAttachment | null
+}
+
+export interface VanderCategoriesGridSection {
+  type: 'categories_grid'
+  heading: string
+  layout: '2x2' | '4x1'
+  items: VanderCategoryItem[]
+}
+
 export type VanderSection =
   | VanderHeroSection
   | VanderServicesSection
@@ -202,6 +269,11 @@ export type VanderSection =
   | VanderContactSection
   | VanderTextImageSection
   | VanderFreetextSection
+  | VanderTeamSection
+  | VanderFaqSection
+  | VanderCtaBannerSection
+  | VanderFeaturedProductsSection
+  | VanderCategoriesGridSection
 
 export interface VanderNavLink {
   label: string
@@ -230,6 +302,8 @@ export interface VanderHeaderSettings {
   ctaUrl: string
   stickyHeader: boolean
   transparentHeader: boolean
+  showAnnouncement: boolean
+  announcementText: string
 }
 
 export interface VanderFooterLink {
@@ -251,6 +325,9 @@ export interface VanderFooterSettings {
   logoUrl: string
   logoAlt: string
   tagline: string
+  address: string
+  contactPhone: string
+  contactEmail: string
   columns: VanderFooterColumn[]
   bottomText: string
   socialLinks: VanderSocialLink[]
